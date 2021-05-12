@@ -1,7 +1,7 @@
 let functions = [];
 
 function printOutput(id,theFunction){
-  document.getElementById(id).innerHTML = theFunction();
+  document.getElementById(id).innerHTML = theFunction;
 }
 
 //Adding Solved Katas to functions array
