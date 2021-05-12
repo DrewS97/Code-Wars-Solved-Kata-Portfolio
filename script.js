@@ -2,7 +2,7 @@ let functions = [];
 function printOutput(id,theFunction){
   document.getElementById(id).innerHTML = theFunction();
 }
-//add our examples as functions
+//Adding Solved Katas to functions array
 functions.push( () =>{
   function iqTest(numbers){
   const numArr = numbers.split(' ');
@@ -104,7 +104,25 @@ functions.push( () =>{
 });
 
 functions.push( () =>{
+  function switcheroo(x){
+    let str = x;
+    let strSplit = str.split("");
+    console.log(strSplit)
 
+    let newArr = [];
+
+    strSplit.forEach(alph => 
+      newArr.push(alph == "a" ? 'b': alph == "b" ? 'a': 'c')
+    );
+
+    console.log(newArr);
+    
+    let newStr = newArr.join("");
+    
+    return newStr;
+  } 
+
+  console.log(switcheroo("abc"));
 });
 
 function setupAndRun(){
@@ -113,22 +131,19 @@ function setupAndRun(){
   document.body.appendChild(wrapper);
 
   let code = [
-        {name:"IQ Test",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number."},
+    {name:"IQ Test",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number."},
         
-        {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
+    {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
 
-        {name:"List Filtering",desc:"In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out."},
+    {name:"List Filtering",desc:"In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out."},
         
-        {name:"Mumbling", desc:"Examples only: 'abcd' becomes ----  A-Bb-Ccc-Dddd and 'ZpglnRxqenU' becomes ----  Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"},
+    {name:"Mumbling", desc:"Examples only: 'abcd' becomes ----  A-Bb-Ccc-Dddd and 'ZpglnRxqenU' becomes ----  Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"},
 
-        {name:"", desc:""}
-      ]
+    {name:"Switcheroo", desc:"Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched."}
+  ]
 
-
-  console.log(code.length)
-  //code.forEach(let item in code)
   let pElement;
-  //code.forEach((item,counter) => {
+  //Printing to the web page
   for(let i=0;i<code.length;i++){
     pElement = document.createElement('p');
     pElement.innerHTML = `<h3>${code[i].name}</h3>${code[i].desc}<br><button id='${code[i].name}Button'>Run</button><br><textarea id='${code[i].name}Output'></textarea><hr>`;
@@ -136,7 +151,6 @@ function setupAndRun(){
     //add event listener
     document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}Output`,functions[i]));
   }
-  //});
 }
 
 
