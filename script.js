@@ -65,6 +65,7 @@ functions.push( () =>{
     }
 
     console.log(newArr);
+    return newArr;
   }
 
 
@@ -109,15 +110,13 @@ functions.push( () =>{
   function switcheroo(x){
     let str = x;
     let strSplit = str.split("");
-    console.log(strSplit)
+    
 
     let newArr = [];
 
     strSplit.forEach(alph => 
       newArr.push(alph == "a" ? 'b': alph == "b" ? 'a': 'c')
     );
-
-    console.log(newArr);
     
     let newStr = newArr.join("");
     
