@@ -24,15 +24,14 @@ functions.push( () =>{
   let statuses = numArr.map(checkStatus),
   uniqueStatus = findUniqueStatus(numArr);
 
-  console.log(statuses.indexOf(uniqueStatus) + 1);
   return statuses.indexOf(uniqueStatus) + 1;
   }
 
   let num1 = "2 4 7 8 10";
   let num2 = "1 2 1 1";
 
-  iqTest(num1);
-  iqTest(num2);
+  console.log(iqTest(num1));
+  console.log(iqTest(num2));
 });
 
 functions.push( () =>{
@@ -41,15 +40,16 @@ functions.push( () =>{
   
   let result = start.replace(/\s+/g,' ').trim();
   console.log(result);
+  return result;
   }
 
   let test1 = "AWUBBWUBC";
   let test2 = "AWUBWUBWUBBWUBWUBWUBC";
   let test3 = "WUBAWUBBWUBCWUB";
 
-  console.log(songDecoder(test1));
-  console.log(songDecoder(test2));
-  console.log(songDecoder(test3));
+  songDecoder(test1);
+  songDecoder(test2);
+  songDecoder(test3);
 });
 
 
@@ -133,7 +133,7 @@ function setupAndRun(){
   document.body.appendChild(wrapper);
 
   let code = [
-    {name:"IQ Test",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number."},
+    {name:"IQ Test",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)"},
         
     {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
 
@@ -142,7 +142,7 @@ function setupAndRun(){
     {name:"Mumbling", desc:"Examples only: 'abcd' becomes ----  A-Bb-Ccc-Dddd ---- and 'ZpglnRxqenU' becomes ----  Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu ----"},
 
     {name:"Switcheroo", desc:"Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched."}
-  ]
+  ];
 
   let pElement;
   //Printing to the web page
