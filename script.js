@@ -1,7 +1,11 @@
 let functions = [];
 
 function printOutput(id,theFunction){
-  document.getElementById(id).innerHTML = theFunction;
+  console.log(theFunction());
+
+  document.getElementById(id+'Code').innerHTML = theFunction;
+  
+  document.getElementById(id+'Output').innerHTML = theFunction.toString();
 }
 
 //Adding Solved Katas to functions array
@@ -126,13 +130,14 @@ functions.push( () =>{
   console.log(switcheroo("abc"));
 });
 
+console.log(functions[0].call());
 function setupAndRun(){
   //build the page using the DOM
   let wrapper = document.createElement('div');
   document.body.appendChild(wrapper);
 
   let code = [
-    {name:"IQ Test",functionName:"iqTest",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)"},
+    {name:"IQ Test",functionName:"iqTest",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)."},
         
     {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
 
@@ -145,23 +150,49 @@ function setupAndRun(){
   
   let element = document.createElement('p');
   
-  element.innerHTML = `<h2>Kata Portfolio</h2><p>This is a collection of "kata" from the website <a href="https://www.codewars.com">CodeWars</a> that I have solved along with my solutions and their outputs.</p><br><hr>`;
+  element.innerHTML = `<h2 class="title">Kata Portfolio</h2><p class="center">This is a collection of "kata" from the website codewars.com that I have solved along with my solutions and their outputs.</p><br><hr class="dashed">`;
   wrapper.appendChild(element);
 
 
   let pElement;
-  let elementP;
 
   //Printing to the web page
   for(let i=0;i<code.length;i++){
     pElement = document.createElement('p');
-    elementP = document.createElement('p');
-    pElement.innerHTML = `<h3>${code[i].name}</h3>${code[i].desc}<h4>Code</h4><textarea id='${code[i].name}Output' rows= 15 cols= 100></textarea><br><button id='${code[i].name}Button'>Run</button><br>`;
+    pElement.classList.add("center")
+    pElement.innerHTML = `
+    <div class="container-md">
+      <div class="row"> 
+        <h3>${code[i].name}</h3>
+      </div>
+      <div class="row">
+        ${code[i].desc}
+        <hr class="grey">
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>Code</h4>
+          <textarea id='${code[i].name}Code' rows="15" cols="40">
+          </textarea>
+        </div>
+        <div class="col">
+          <br><br><br><br><br><br><br><br>
+          <button id='${code[i].name}Button' class="btn btn-primary">Run</button><br>
+        </div>
+        <div class="col">
+          <h4>Output</h4>
+          <textarea id = '${code[i].name}Output' rows="15" cols="25"></textarea>
+        </div>
+      </div>
+    <div>
+    <br>
+    <hr class="dashed">`;
+
+    //appending the paragraph to the wrapper container
     wrapper.appendChild(pElement);
-    elementP.innerHTML = `<textarea id = '${code[i]}' rows = 5 cols = 50></textarea><hr>`;
-    wrapper.appendChild(elementP);
+
     //add event listener
-    document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}Output`,functions[i]));
+    document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}`,functions[i]));
   }
 }
 
