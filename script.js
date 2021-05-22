@@ -1,21 +1,39 @@
-let functions = [];
+let functions = [
+  iqTest,
+  songDecoder,
+  filter_list,
+  accum,
+  switcheroo
+];
+
+let tests = [
+  testIQ,
+  testSong,
+  testFilter,
+  testAccum,
+  testSwitch
+];
+
+function printFunction(id,theFunction){
+  console.log(theFunction());
+
+  document.getElementById(id+'Code').innerHTML = theFunction;
+}
 
 function printOutput(id,theFunction){
   console.log(theFunction());
 
-  document.getElementById(id+'Code').innerHTML = theFunction;
-  
-  document.getElementById(id+'Output').innerHTML = theFunction.toString();
+  document.getElementById(id+'Output').innerHTML = theFunction;
 }
 
 //Adding Solved Katas to functions array
-functions.push( () =>{
-  function iqTest(numbers){
-  const numArr = numbers.split(' ');
 
-  const checkStatus = num => (parseInt(num) % 2) ? 'odd' : 'even';
+function iqTest(numbers){
+  let numArr = numbers.split(' ');
 
-  const findUniqueStatus = array => {
+  let checkStatus = num => (parseInt(num) % 2) ? 'odd' : 'even';
+
+  let findUniqueStatus = array => {
     let numEvens = 0;
 
     array.forEach(function(value){
@@ -29,24 +47,27 @@ functions.push( () =>{
   uniqueStatus = findUniqueStatus(numArr);
 
   return statuses.indexOf(uniqueStatus) + 1;
-  }
+}
 
+function testIQ() {
   let num1 = "2 4 7 8 10";
   let num2 = "1 2 1 1";
 
   console.log(iqTest(num1));
   console.log(iqTest(num2));
-});
+};
 
-functions.push( () =>{
-  function songDecoder(song){
+
+
+function songDecoder(song){
   let start = song.replaceAll("WUB", " ");
   
   let result = start.replace(/\s+/g,' ').trim();
   console.log(result);
   return result;
-  }
+}
 
+function testSong() {
   let test1 = "AWUBBWUBC";
   let test2 = "AWUBWUBWUBBWUBWUBWUBC";
   let test3 = "WUBAWUBBWUBCWUB";
@@ -54,81 +75,86 @@ functions.push( () =>{
   songDecoder(test1);
   songDecoder(test2);
   songDecoder(test3);
-});
+}
 
 
-functions.push( () =>{
-  function filter_list(l) {
-    let arrr = l;
-    let newArr = [];
+function filter_list(l) {
+  let arrr = l;
+  let newArr = [];
 
-    for (i = 0; i < arrr.length; i++){
-      if (typeof arrr[i] != "string"){
-        newArr.push(arrr[i]);
-      }
+  for (i = 0; i < arrr.length; i++){
+    if (typeof arrr[i] != "string"){
+      newArr.push(arrr[i]);
     }
-
-    console.log(newArr);
-    return newArr;
   }
 
+  console.log(newArr);
+  return newArr;
+}
 
+function testFilter() {
   let arr1 = [1,2,'a','b'];
   let arr2 = [1,2,'aasf','1','123',123];
 
   filter_list(arr1);
   filter_list(arr2);
-});
+}
 
-functions.push( () =>{
-  function accum(s) {
-    let str = s;
-    let num = -1;
-    let arr = str.split("");
 
-    let newArr = [];
 
-    arr.forEach(alph => {
-      newArr.push(alph.toUpperCase());
+function accum(s) {
+  let str = s;
+  let num = -1;
+  let arr = str.split("");
 
-      for (let i = 0; i <= num; i++) {
-        newArr.push(alph.toLowerCase());
-      }
+  let newArr = [];
 
-      newArr.push("-");
-      num++;
-    });
+  arr.forEach(alph => {
+    newArr.push(alph.toUpperCase());
+
+    for (let i = 0; i <= num; i++) {
+      newArr.push(alph.toLowerCase());
+    }
+
+    newArr.push("-");
+    num++;
+  });
     
-    let newStr = newArr.join("");
-    lastStr = newStr.substring(0, newStr.length - 1);
-    //console.log(newArr);
-    
-    return lastStr;
-  }
+  let newStr = newArr.join("");
+  lastStr = newStr.substring(0, newStr.length - 1);
+  //console.log(newArr);
+  
+  return lastStr;
+}
 
+function testAccum() {
   console.log(accum("abcd"));
   console.log(accum("ZpglnRxqenU"));
-});
+}
 
-functions.push( () =>{
-  function switcheroo(x){
-    let str = x;
-    let strSplit = str.split("");
-    
 
-    let newArr = [];
 
-    strSplit.forEach(alph => 
-      newArr.push(alph == "a" ? 'b': alph == "b" ? 'a': 'c')
-    );
-    
-    let newStr = newArr.join("");
-    
-    return newStr;
-  } 
+function switcheroo(x){
+  let str = x;
+  let strSplit = str.split("");
+  
 
+  let newArr = [];
+
+  strSplit.forEach(alph => 
+    newArr.push(alph == "a" ? 'b': alph == "b" ? 'a': 'c')
+  );
+  
+  let newStr = newArr.join("");
+  
+  return newStr;
+} 
+
+function testSwitch() {
   console.log(switcheroo("abc"));
-});
+}
+
+
 
 console.log(functions[0].call());
 function setupAndRun(){
@@ -172,19 +198,20 @@ function setupAndRun(){
       <div class="row">
         <div class="col">
           <h4>Code</h4>
-          <textarea id='${code[i].name}Code' rows="15" cols="40">
+          <textarea id='${code[i].name}Code' class="form-control" rows="15" cols="40">
           </textarea>
         </div>
         <div class="col">
           <br><br><br><br><br><br><br><br>
-          <button id='${code[i].name}Button' class="btn btn-primary">Run</button><br>
+          <button id='${code[i].name}Button' class="btn btn-primary btn-lg">Run</button><br>
         </div>
         <div class="col">
           <h4>Output</h4>
-          <textarea id = '${code[i].name}Output' rows="15" cols="25"></textarea>
+          <textarea id = '${code[i].name}Output' class="form-control" rows="15" cols="25"></textarea>
         </div>
       </div>
     <div>
+    <br>
     <br>
     <hr class="dashed">`;
 
@@ -192,7 +219,9 @@ function setupAndRun(){
     wrapper.appendChild(pElement);
 
     //add event listener
-    document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}`,functions[i]));
+    document.getElementById(`${code[i].name}Button`).addEventListener("click",printFunction(`${code[i].name}`,functions[i]));
+
+    document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}`,tests[i]));
   }
 }
 
