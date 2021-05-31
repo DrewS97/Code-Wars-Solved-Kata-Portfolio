@@ -1,22 +1,10 @@
-let functions = [
-  iqTest,
-  songDecoder,
-  filter_list,
-  accum,
-  switcheroo
-];
-
-let tests = [
-  
-  testIQ,
-  testSong,
-  testFilter,
-  testAccum,
-  testSwitch
-];
+//list of functions
+let funcList = [];
+//list of functions to give output
+let tests = [];
 
 function printFunction(id,theFunction){
-  console.log(theFunction());
+  console.log(theFunction.toString());
 
   document.getElementById(id+'Code').innerHTML = theFunction;
 }
@@ -50,6 +38,9 @@ function iqTest(numbers){
   return statuses.indexOf(uniqueStatus) + 1;
 }
 
+//pushing into function list
+funcList.push(iqTest);
+
 function testIQ() {
   let num1 = "2 4 7 8 10";
   let num2 = "1 2 1 1";
@@ -57,6 +48,9 @@ function testIQ() {
   console.log(iqTest(num1));
   console.log(iqTest(num2));
 };
+
+//pushing into test list
+tests.push(testIQ);
 
 
 
@@ -68,6 +62,8 @@ function songDecoder(song){
   return result;
 }
 
+funcList.push(songDecoder);
+
 function testSong() {
   let test1 = "AWUBBWUBC";
   let test2 = "AWUBWUBWUBBWUBWUBWUBC";
@@ -78,8 +74,10 @@ function testSong() {
   songDecoder(test3);
 }
 
+tests.push(testSong);
 
-function filter_list(l) {
+
+function filterList(l) {
   let arrr = l;
   let newArr = [];
 
@@ -92,15 +90,16 @@ function filter_list(l) {
   console.log(newArr);
   return newArr;
 }
+funcList.push(filterList);
 
 function testFilter() {
   let arr1 = [1,2,'a','b'];
   let arr2 = [1,2,'aasf','1','123',123];
 
-  filter_list(arr1);
-  filter_list(arr2);
+  filterList(arr1);
+  filterList(arr2);
 }
-
+tests.push(testFilter);
 
 
 function accum(s) {
@@ -127,12 +126,13 @@ function accum(s) {
   
   return lastStr;
 }
+funcList.push(accum);
 
 function testAccum() {
   console.log(accum("abcd"));
   console.log(accum("ZpglnRxqenU"));
 }
-
+tests.push(testAccum);
 
 
 function switcheroo(x){
@@ -150,21 +150,22 @@ function switcheroo(x){
   
   return newStr;
 } 
+funcList.push(switcheroo);
 
 function testSwitch() {
   console.log(switcheroo("abc"));
 }
+tests.push(testSwitch);
 
 
 
-console.log(functions[0].call());
 function setupAndRun(){
   //build the page using the DOM
   let wrapper = document.createElement('div');
   document.body.appendChild(wrapper);
 
   let code = [
-    {name:"IQ Test",functionName:"iqTest",desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)."},
+    {name:"IQ Test", desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)."},
         
     {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
 
@@ -220,7 +221,7 @@ function setupAndRun(){
     wrapper.appendChild(pElement);
 
     //add event listener
-    document.getElementById(`${code[i].name}Button`).addEventListener("click",printFunction(`${code[i].name}`,functions[i]));
+    document.getElementById(`${code[i].name}Button`).addEventListener("click",printFunction(`${code[i].name}`,funcList[i]));
 
     document.getElementById(`${code[i].name}Button`).addEventListener("click",printOutput(`${code[i].name}`,tests[i]));
   }
