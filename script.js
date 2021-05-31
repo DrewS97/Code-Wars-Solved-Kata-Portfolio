@@ -11,8 +11,8 @@ function printFunction(id,theFunction){
 
 function printOutput(id,theFunction){
   console.log(theFunction());
-
-  document.getElementById(id+'Output').innerHTML = theFunction;
+  
+  document.getElementById(id+'Output').innerHTML = theFunction();
 }
 
 //Adding Solved Katas to functions array
@@ -45,8 +45,12 @@ function testIQ() {
   let num1 = "2 4 7 8 10";
   let num2 = "1 2 1 1";
 
-  console.log(iqTest(num1));
-  console.log(iqTest(num2));
+  let results = [];
+
+  results.push(iqTest(num1) + " "); 
+  results.push(" " + iqTest(num2));
+  
+  return results;
 };
 
 //pushing into test list
@@ -58,7 +62,7 @@ function songDecoder(song){
   let start = song.replaceAll("WUB", " ");
   
   let result = start.replace(/\s+/g,' ').trim();
-  console.log(result);
+  
   return result;
 }
 
@@ -69,9 +73,12 @@ function testSong() {
   let test2 = "AWUBWUBWUBBWUBWUBWUBC";
   let test3 = "WUBAWUBBWUBCWUB";
 
-  songDecoder(test1);
-  songDecoder(test2);
-  songDecoder(test3);
+  let results = [];
+  results.push(songDecoder(test1) + " ");
+  results.push(" " + songDecoder(test2));
+  results.push(" " + songDecoder(test3));
+  console.log(results);
+  return results;
 }
 
 tests.push(testSong);
@@ -86,8 +93,6 @@ function filterList(l) {
       newArr.push(arrr[i]);
     }
   }
-
-  console.log(newArr);
   return newArr;
 }
 funcList.push(filterList);
@@ -95,9 +100,10 @@ funcList.push(filterList);
 function testFilter() {
   let arr1 = [1,2,'a','b'];
   let arr2 = [1,2,'aasf','1','123',123];
-
-  filterList(arr1);
-  filterList(arr2);
+  let results = [];
+  results.push(filterList(arr1));
+  results.push(" " + filterList(arr2));
+  return results;
 }
 tests.push(testFilter);
 
@@ -129,8 +135,10 @@ function accum(s) {
 funcList.push(accum);
 
 function testAccum() {
-  console.log(accum("abcd"));
-  console.log(accum("ZpglnRxqenU"));
+  let results = [];
+  results.push(accum("abcd"));
+  results.push(" " + accum("ZpglnRxqenU"));
+  return results;
 }
 tests.push(testAccum);
 
@@ -153,7 +161,7 @@ function switcheroo(x){
 funcList.push(switcheroo);
 
 function testSwitch() {
-  console.log(switcheroo("abc"));
+  return switcheroo("abcbbbcabaacabc");
 }
 tests.push(testSwitch);
 
@@ -165,15 +173,15 @@ function setupAndRun(){
   document.body.appendChild(wrapper);
 
   let code = [
-    {name:"IQ Test", desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)."},
+    {name:"IQ Test", desc:"Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number. IMPORTANT: Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0). Example test: '2 4 7 8 10'."},
         
-    {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message."},
+    {name:"Dubstep",desc:"Take the Dubstep sound of 'WUB' out of the strings to find the hidden message. Example test: 'AWUBWUBWUBBWUBWUBWUBC'"},
 
-    {name:"List Filtering",desc:"In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out."},
+    {name:"List Filtering",desc:"In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out. Example test: [1,2,'aasf','1','123',123]"},
         
     {name:"Mumbling", desc:"Examples only: 'abcd' becomes ----  A-Bb-Ccc-Dddd ---- and 'ZpglnRxqenU' becomes ----  Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu ----"},
 
-    {name:"Switcheroo", desc:"Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched."}
+    {name:"Switcheroo", desc:"Given a string made up of letters a, b, and/or c, switch the position of letters a and b (change a to b and vice versa). Leave any incidence of c untouched. Example test: 'abcbbbcabaacabc'"}
   ];
   
   let element = document.createElement('p');
