@@ -4,14 +4,10 @@ let funcList = [];
 let tests = [];
 
 function printFunction(id,theFunction){
-  console.log(theFunction.toString());
-
-  document.getElementById(id+'Code').innerHTML = theFunction;
+  document.getElementById(id+'Code').innerHTML = theFunction.toString();
 }
 
 function printOutput(id,theFunction){
-  console.log(theFunction());
-  
   document.getElementById(id+'Output').innerHTML = theFunction();
 }
 
@@ -56,8 +52,6 @@ function testIQ() {
 //pushing into test list
 tests.push(testIQ);
 
-
-
 function songDecoder(song){
   let start = song.replaceAll("WUB", " ");
   
@@ -77,7 +71,6 @@ function testSong() {
   results.push(songDecoder(test1) + " ");
   results.push(" " + songDecoder(test2));
   results.push(" " + songDecoder(test3));
-  console.log(results);
   return results;
 }
 
